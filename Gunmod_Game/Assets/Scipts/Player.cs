@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
 
     public bool playerActive;
 
+    public Transform playerCam;
+    public float rotationSpeed = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+        //Lets you rotate to aim the gun
+        transform.rotation = Quaternion.Slerp(transform.rotation, playerCam.rotation, rotationSpeed * Time.deltaTime);
 
         if (playerActive == true)
         {
